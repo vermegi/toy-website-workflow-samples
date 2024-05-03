@@ -17,11 +17,11 @@ env:
 
 jobs:
   lint:
-    uses: ./.github/workflows/env_lint.yml
+    uses: ./.github/workflows/envs_lint.yml
 
   # Deploy to the test environment.
   deploy-test:
-    uses: ./.github/workflows/env_deploy.yml
+    uses: ./.github/workflows/envs_deploy.yml
     needs: lint
     with:
       environmentType: Test
