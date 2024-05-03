@@ -27,10 +27,7 @@ jobs:
       environmentType: Test
       environmentName: EnvsTest
       resourceGroupName: ToyWebsiteEnvsTest
-    secrets:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_ENVS_TEST }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    secrets: inherit
 
   # Deploy to the production environment.
   deploy-production:
@@ -40,7 +37,4 @@ jobs:
       environmentType: Production
       environmentName: EnvsPrd
       resourceGroupName: ToyWebsiteEnvsPrd
-    secrets:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID_ENVS_PRD }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    secrets: inherit

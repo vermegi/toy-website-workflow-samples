@@ -12,17 +12,11 @@ on:
       resourceGroupName:
         required: true
         type: string
-    secrets:
-      AZURE_CLIENT_ID:
-        required: true
-      AZURE_TENANT_ID:
-        required: true
-      AZURE_SUBSCRIPTION_ID:
-        required: true
 
 jobs:
   validate:
      runs-on: ubuntu-latest
+     environment: ${{ inputs.environmentName }}
      steps:
      - uses: actions/checkout@v3
      - uses: azure/login@v1
