@@ -76,7 +76,7 @@ jobs:
         template: ./deploy/main.bicep
         parameters: >
           environmentType=${{ inputs.environmentType }}
-          reviewApiUrl=${{ variables.REVIEW_API_URL }}
+          reviewApiUrl=${{ vars.REVIEW_API_URL }}
           reviewApiKey=${{ secrets.REVIEW_API_KEY }}
 
   smoke-test:
