@@ -34,7 +34,7 @@ jobs:
 
   # Deploy to the production environment.
   deploy-production:
-    uses: ./.github/workflows/env_deploy.yml
+    uses: ./.github/workflows/envs_deploy.yml
     needs: deploy-test
     with:
       environmentType: Production
