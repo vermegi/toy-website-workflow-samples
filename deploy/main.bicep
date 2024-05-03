@@ -43,7 +43,9 @@ var environmentConfigurationMap = {
   Test: {
     appServicePlan: {
       sku: {
-        name: 'F1'
+        // free quota fix
+//        name: 'F1'
+        name: 'S1'
       }
     }
     storageAccount: {
