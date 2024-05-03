@@ -67,6 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ToyWebsiteTest
     needs: preview
+    outputs:
+      appServiceAppHostName: ${{ steps.deploy.outputs.appServiceAppHostName }}
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
@@ -77,9 +79,25 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     - uses: azure/arm-deploy@v1
       name: Deploy website
+      id: deploy
       with:
         failOnStdErr: false
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./deploy/main.bicep
         parameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+    - uses: actions/checkout@v3
+    - run: |
+        $container = New-PesterContainer `
+          -Path 'deploy/Website.Tests.ps1' `
+          -Data @{ HostName = '${{needs.deploy.outputs.appServiceAppHostName}}' }
+        Invoke-Pester `
+          -Container $container `
+          -CI
+      name: Run smoke tests
+      shell: pwsh
