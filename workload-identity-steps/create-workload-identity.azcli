@@ -7,14 +7,14 @@ applicationRegistrationAppId=$(echo $applicationRegistrationDetails | jq -r '.ap
 
 az ad app federated-credential create \
    --id $applicationRegistrationObjectId \
-   --parameters "{\"name\":\"toy-website-workflow-samples-test\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repo:${githubOrganizationName}/${githubRepositoryName}:environment:Website\",\"audiences\":[\"api://AzureADTokenExchange\"]}"
+   --parameters "{\"name\":\"toy-website-workflow-samples-test-env\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repo:${githubOrganizationName}/${githubRepositoryName}:environment:ToyWebsiteTest\",\"audiences\":[\"api://AzureADTokenExchange\"]}"
 
 az ad app federated-credential create \
    --id $applicationRegistrationObjectId \
    --parameters "{\"name\":\"toy-website-test-branch\",\"issuer\":\"https://token.actions.githubusercontent.com\",\"subject\":\"repo:${githubOrganizationName}/${githubRepositoryName}:ref:refs/heads/test-bicep-code\",\"audiences\":[\"api://AzureADTokenExchange\"]}"
 
 
-resourceGroupResourceId=$(az group create --name ToyWebsiteTest --location westus3 --query id --output tsv)
+resourceGroupResourceId=$(az group create --name ToyWebsiteTest --location francecentral --query id --output tsv)
 
 az ad sp create --id $applicationRegistrationObjectId
 az role assignment create \

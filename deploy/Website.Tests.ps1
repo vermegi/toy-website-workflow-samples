@@ -13,7 +13,7 @@ It 'Serves pages over HTTPS' {
         Should -Be 200 -Because "the website requires HTTPS"
     }
 
-It 'Does not serves pages over HTTP' {
+It 'Should not serves pages over HTTP' {
       $request = [System.Net.WebRequest]::Create("http://$HostName/")
       $request.AllowAutoRedirect = $false
       $request.GetResponse().StatusCode | 

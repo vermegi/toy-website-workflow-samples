@@ -65,6 +65,8 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
   location: location
   properties: {
     serverFarmId: appServicePlan.id
+    // FIX smoke test 
+    // httpsOnly: true
     siteConfig: {
       appSettings: [
         {

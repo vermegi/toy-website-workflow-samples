@@ -1,11 +1,11 @@
 name: deploy-toy-website-test
 concurrency: deploy-toy-website-test
 
-on: [workflow_dispatch]
-# on:
-  # push:
-    # branches:
-      # - test-bicep-code
+# on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - test-bicep-code
 
 permissions:
   id-token: write
