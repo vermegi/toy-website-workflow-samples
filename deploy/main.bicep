@@ -12,17 +12,11 @@ param environmentType string
 @maxLength(13)
 param resourceNameSuffix string = uniqueString(resourceGroup().id)
 
-// FIX linter error by commenting this line
-//param storageAccountNameParam string = uniqueString(resourceGroup().id)
-
 // Define the names for resources.
 var appServiceAppName = 'toy-website-${resourceNameSuffix}'
 var appServicePlanName = 'toy-website'
 var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
 var applicationInsightsName = 'toywebsite'
-
-// FIX storage account name error
-//var storageAccountName = 'mystorageresourceNameSuffix'
 var storageAccountName = 'mystorage${resourceNameSuffix}'
 
 // Define the SKUs for each component based on the environment type.
@@ -65,8 +59,7 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
   location: location
   properties: {
     serverFarmId: appServicePlan.id
-    // FIX smoke test 
-    // httpsOnly: true
+    httpsOnly: true
     siteConfig: {
       appSettings: [
         {
