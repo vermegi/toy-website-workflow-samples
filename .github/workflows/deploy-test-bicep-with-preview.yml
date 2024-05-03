@@ -1,11 +1,11 @@
-name: deploy-toy-website-test
+name: deploy-toy-website-test-with-preview
 concurrency: deploy-toy-website-test
 
-on: [workflow_dispatch]
-# on:
-  # push:
-    # branches:
-      # - test-bicep-code
+# on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - test-bicep-code
 
 permissions:
   id-token: write
@@ -42,9 +42,31 @@ jobs:
         parameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
         deploymentMode: Validate
 
-  deploy:
+  preview:
     runs-on: ubuntu-latest
     needs: [lint, validate]
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/login@v1
+      name: Sign in to Azure
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID_TEST }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    - uses: azure/arm-deploy@v1
+      name: Run what-if
+      with:
+        failOnStdErr: false
+        resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
+        template: deploy/main.bicep
+        parameters: >
+          environmentType=${{ env.ENVIRONMENT_TYPE }}
+        additionalArguments: --what-if
+
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ToyWebsiteTest
+    needs: preview
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
