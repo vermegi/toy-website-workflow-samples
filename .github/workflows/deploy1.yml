@@ -1,4 +1,5 @@
 name: deploy-toy-website-simple
+concurrency: deploy-toy-website-simple
 
 on: [workflow_dispatch]
 
