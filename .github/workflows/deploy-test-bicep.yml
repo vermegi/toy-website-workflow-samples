@@ -2,6 +2,7 @@ name: deploy-toy-website-test
 concurrency: deploy-toy-website-test
 
 # on: [workflow_dispatch]
+
 on:
   push:
     branches:
