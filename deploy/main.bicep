@@ -13,7 +13,7 @@ param environmentType string
 param resourceNameSuffix string = uniqueString(resourceGroup().id)
 
 // FIX linter error by commenting this line
-//param storageAccountNameParam string = uniqueString(resourceGroup().id)
+param storageAccountNameParam string = uniqueString(resourceGroup().id)
 
 // Define the names for resources.
 var appServiceAppName = 'toy-website-${resourceNameSuffix}'
