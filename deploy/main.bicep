@@ -22,8 +22,8 @@ var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
 var applicationInsightsName = 'toywebsite'
 
 // FIX storage account name error
-var storageAccountName = 'mystorageresourceNameSuffix'
-//var storageAccountName = 'mystorage${resourceNameSuffix}'
+//var storageAccountName = 'mystorageresourceNameSuffix'
+var storageAccountName = 'mystorage${resourceNameSuffix}'
 
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
