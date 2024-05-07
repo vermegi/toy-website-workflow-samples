@@ -13,7 +13,7 @@ param environmentType string
 param resourceNameSuffix string = uniqueString(resourceGroup().id)
 
 // FIX linter error by commenting this line
-param storageAccountNameParam string = uniqueString(resourceGroup().id)
+// param storageAccountNameParam string = uniqueString(resourceGroup().id)
 
 // Define the names for resources.
 var appServiceAppName = 'toy-website-${resourceNameSuffix}'
@@ -22,8 +22,8 @@ var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
 var applicationInsightsName = 'toywebsite'
 
 // FIX storage account name error
-var storageAccountName = 'mystorageresourceNameSuffix'
-//var storageAccountName = 'mystorage${resourceNameSuffix}'
+// var storageAccountName = 'mystorageresourceNameSuffix'
+var storageAccountName = 'mystorage${resourceNameSuffix}'
 
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
